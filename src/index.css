@@ -1,0 +1,61 @@
+body {
+  margin: 10px;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+
+@media (max-width: 500px) {
+  table {
+    font-size: 12px;
+    text-align: center;
+  }
+}
+
+.react-bootstrap-table table {
+  margin-top: 20px;
+  table-layout: auto !important;
+}
+
+.container {
+  margin-top: 20px;
+}
+
+.sum_widget {
+  background-color: lightgray;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  align-items: center;
+  justify-content: center;
+  border: gray solid 2px;
+}
+
+.innerContainer {
+  justify-self: center;
+  height: 75px;
+}
+
+.sum_widget__item {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  justify-self: center;
+  height: 75px;
+  width: 100%;
+  text-align: center;
+}
+
+.sum_widget__item:not(:last-child) {
+  border-right: gray solid 2px;
+}
+
+.item__title {
+  border-bottom: gray solid 2px;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  font-weight: 700;
+  font-size: 16px;
+}
