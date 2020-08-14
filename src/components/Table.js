@@ -5,33 +5,31 @@ import { useStoreActions, useStoreState } from "easy-peasy";
 import { capitalizeFirstLetter, omit } from "../utils";
 
 export const Table = () => {
-  
   const setCellValue = useStoreActions((actions) => actions.setCellValue);
   const data = useStoreState((state) => state.data);
-  const normData=Object.entries(omit(Object.values(data)[0], ["id"]));
-  
-  const createColumns = (normData) => {
-    const columns = normData
-      .map(([key]) => {
-        const capitalizedText = capitalizeFirstLetter(key);
-        const column = { dataField: key, text: capitalizedText };
+  const columnsData = Object.entries(omit(Object.values(data)[0], ["id"]));
 
-        if (key === "name" || key === "date") {
-          return { ...column, editable: false };
-        } else {
-          return {
-            ...column,
-            validator: (newValue) =>
-              isNaN(newValue)
-                ? { valid: false, message: "Value should be numeric" }
-                : true,
-          };
-        }
-      })
+  const createColumns = (data) => {
+    const columns = data.map(([key]) => {
+      const capitalizedText = capitalizeFirstLetter(key);
+      const column = { dataField: key, text: capitalizedText };
+
+      if (key === "name" || key === "date") {
+        return { ...column, editable: false };
+      } else {
+        return {
+          ...column,
+          validator: (newValue) =>
+            isNaN(newValue)
+              ? { valid: false, message: "Value should be numeric" }
+              : true,
+        };
+      }
+    });
     return columns;
   };
 
-  const columns = createColumns(normData);
+  const columns = createColumns(columnsData);
 
   return (
     <BootstrapTable
@@ -41,7 +39,7 @@ export const Table = () => {
       columns={columns}
       cellEdit={cellEditFactory({
         mode: "click",
-        blurToSave: true,        
+        blurToSave: true,
         afterSaveCell: (_, newValue, row, column) => {
           newValue = Number(newValue);
           setCellValue({

@@ -9,7 +9,7 @@ export const SumWidget = () => {
     Object.entries(omit(e, ["name", "date", "id"]))
   );
 
-  const calculateTotals= (obj) => {
+  const calculateColumnTotals = (obj) => {
     return obj.reduce((sumObj, el) => {
       el.forEach(([key, val]) =>
         sumObj[key] ? (sumObj[key] += val) : (sumObj[key] = val)
@@ -18,13 +18,11 @@ export const SumWidget = () => {
     }, {});
   };
 
-  const totals = calculateTotals(valuesData);
-
+  const columnTotals = Object.entries(calculateColumnTotals(valuesData));
 
   return (
     <div className="sum_widget">
-      {" "}
-      {Object.entries(totals).map(([key, value]) => (
+      {columnTotals.map(([key, value]) => (
         <div className="sum_widget__item item" key={key}>
           <div className="item__title">{key}</div>
           <div>{value}</div>

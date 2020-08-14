@@ -9,17 +9,16 @@ import {
   ResponsiveContainer,
   ReferenceLine,
 } from "recharts";
-//recharts/v/2.0.0-beta.6
 
 import { useStoreState } from "easy-peasy";
 
 export const BarChart = () => {
-  const chartData = useStoreState((state) => state.data);
-  const normData = Object.values(chartData);
+  const data = useStoreState((state) => state.data);
+  const chartData = Object.values(data);
 
   return (
     <ResponsiveContainer width="95%" height={350} minWidth={300}>
-      <ReBarChart width={600} height={275} data={normData}>
+      <ReBarChart width={600} height={275} data={chartData}>
         <CartesianGrid strokeDasharray="3 3" />
         <XAxis dataKey="name" />
         <YAxis />

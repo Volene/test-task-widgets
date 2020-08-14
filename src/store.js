@@ -1,4 +1,5 @@
 import { createStore, action } from "easy-peasy";
+import { v4 as uuidv4 } from "uuid";
 
 const data = [
   { date: "27.08.2017", name: "DAY1", val1: 10, val2: 10, val3: 106 },
@@ -9,20 +10,21 @@ const data = [
 ];
 
 const normalizeData = data.reduce((a, e) => {
-  const uuid= Math.random(); //smthlikeuuid
+  const uuid = uuidv4();
   return { ...a, [uuid]: { ...e, id: uuid } };
 }, {});
 
 export const store = createStore({
   data: normalizeData,
 
-  setCellValue: action((state, payload) => {
+  setCellValue: action((state, { id, column, newValue }) => {
+    const editedCell = {
+      [id]: { ...state.data[id], [column]: newValue },
+    };
+
     state.data = {
       ...state.data,
-      [payload.id]: {
-        ...state.data[payload.id],
-        [payload.column]: payload.newValue,
-      },
+      ...editedCell
     };
-  })
+  }),
 });
