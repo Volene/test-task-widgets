@@ -1,4 +1,5 @@
-export const capitalizeFirstLetter = (str) =>str[0].toUpperCase() + str.slice(1);
+export const capitalizeFirstLetter = (str) =>
+  str[0].toUpperCase() + str.slice(1);
 
 export const omit = (obj, keys) => {
   const objKeys = Object.keys(obj);
@@ -9,3 +10,5 @@ export const omit = (obj, keys) => {
     {}
   );
 };
+
+export const randomColor = () =>"#" + Math.floor(Math.random() * 16777215).toString(16);
