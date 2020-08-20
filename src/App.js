@@ -4,7 +4,7 @@ import { BarChart } from "./components/BarChart";
 import { SumWidget } from "./components/SumWidget";
 function App() {
   return (
-    <div className="container">
+    <div className="container1">
       <SumWidget></SumWidget>
       <Table />
       <BarChart />

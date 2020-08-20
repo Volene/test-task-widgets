@@ -7,7 +7,24 @@ import { capitalizeFirstLetter, omit } from "../utils";
 export const Table = () => {
   const setCellValue = useStoreActions((actions) => actions.setCellValue);
   const data = useStoreState((state) => state.data);
-  const columnsData = Object.entries(omit(Object.values(data)[0], ["id"]));
+  
+  const handleCellSave = (_, newValue, row, column) => {
+    newValue = Number(newValue);
+    setCellValue({
+      id: row.id,
+      column: column.dataField,
+      newValue: newValue,
+    });
+  };
+
+  const cellEditorConfig = cellEditFactory({
+    mode: "click",
+    blurToSave: true,
+    beforeSaveCell: handleCellSave,
+    afterSaveCell: handleCellSave,
+  });
+
+  const columnData = Object.entries(omit(Object.values(data)[0], ["id"]));
 
   const createColumns = (data) => {
     const columns = data.map(([key]) => {
@@ -29,7 +46,7 @@ export const Table = () => {
     return columns;
   };
 
-  const columns = createColumns(columnsData);
+  const columns = createColumns(columnData);
 
   return (
     <BootstrapTable
@@ -37,18 +54,7 @@ export const Table = () => {
       keyField="id"
       data={Object.values(data)}
       columns={columns}
-      cellEdit={cellEditFactory({
-        mode: "click",
-        blurToSave: true,
-        afterSaveCell: (_, newValue, row, column) => {
-          newValue = Number(newValue);
-          setCellValue({
-            id: row.id,
-            column: column.dataField,
-            newValue: newValue,
-          });
-        },
-      })}
+      cellEdit={cellEditorConfig}
     />
   );
 };

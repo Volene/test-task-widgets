@@ -9,14 +9,16 @@ import {
   ResponsiveContainer,
   ReferenceLine,
 } from "recharts";
-import { omit,randomColor } from "../utils";
+import { omit, randomColor } from "../utils";
 
 import { useStoreState } from "easy-peasy";
 
 export const BarChart = () => {
   const data = useStoreState((state) => state.data);
   const chartData = Object.values(data);
-  const bars=Object.keys(omit(Object.values(data)[0],['id','name','date']));
+  const bars = Object.keys(
+    omit(Object.values(data)[0], ["id", "name", "date"])
+  );
 
   return (
     <ResponsiveContainer width="95%" height={350} minWidth={300}>
@@ -26,7 +28,9 @@ export const BarChart = () => {
         <YAxis />
         <Tooltip />
         <ReferenceLine y={0} stroke="#000" />
-        {bars.map(bar=><Bar dataKey={bar} fill={randomColor()}></Bar>)}
+        {bars.map((bar) => (
+          <Bar dataKey={bar} fill={randomColor()}></Bar>
+        ))}
       </ReBarChart>
     </ResponsiveContainer>
   );

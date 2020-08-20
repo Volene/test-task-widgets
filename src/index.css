@@ -7,6 +7,11 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+#root {
+  height: 97vh;
+  display: flex;
+  justify-content: center;
+}
 
 @media (max-width: 500px) {
   table {
@@ -16,15 +21,22 @@ body {
 }
 
 .react-bootstrap-table table {
-  margin-top: 20px;
   table-layout: auto !important;
 }
 
-.container {
-  margin-top: 20px;
+.container1 {
+  width: 90%;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-gap: 10px;
+  justify-items: center;
+  padding: 20px 0;
 }
 
 .sum_widget {
+  margin-top: 20px;
+  height: 80px;
+  width: 80%;
   background-color: lightgray;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -58,4 +70,21 @@ body {
   text-transform: uppercase;
   font-weight: 700;
   font-size: 16px;
+}
+
+@media (max-width: 1020px) {
+  .recharts-responsive-container{
+    grid-column:span 2
+  }
+}
+@media (max-width: 678px) {
+  .recharts-responsive-container{
+    grid-column:span 1
+  }
+}
+
+@media (max-width: 768px) {
+  .recharts-wrapper {
+    left: -25px;
+  }
 }
